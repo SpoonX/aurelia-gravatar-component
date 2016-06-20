@@ -1,20 +1,20 @@
-import {computedFrom, bindable} from 'aurelia-framework';
+import {computedFrom, bindable, inject} from 'aurelia-framework';
+import {Config} from './config';
 import md5 from 'md5';
 
+@inject(Config)
 export class GravatarCustomElement {
 
-  @bindable email = '';
+  @bindable email        = '';
+  @bindable size         = 200;
+  @bindable rating       = 'g';
+  @bindable forceDefault = false;
+  @bindable defaultTo    = 'monsterid';
+  @bindable secure       = false;
 
-  @bindable size = 200;
-
-  // g: suitable for display on all websites with any audience type.
-  // pg: may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.
-  // r: may contain such things as harsh profanity, intense violence, nudity, or hard drug use.
-  // x: may contain hardcore sexual imagery or extremely disturbing violence.
-  rating = 'g';
-  forceDefault = false;
-  defaultTo = 'monsterid';
-  secure = false;
+  constructor(config) {
+    Object.assign(this, config.configurations); /* alter the defaults of the view model */
+  }
 
   @computedFrom('defaultTo')
   get defaultGravatar() {
@@ -29,18 +29,10 @@ export class GravatarCustomElement {
 
   @computedFrom('size', 'email', 'defaultGravatar', 'forceDefault', 'secure')
   get url() {
-    let base;
-    if (this.secure) {
-      base = 'http://www.gravatar.com/avatar';
-    } else {
-      base = 'https://secure.gravatar.com/avatar';
-    }
-
+    let base = (this.secure ? 'https://secure' : 'http://www') + '.gravatar.com/avatar';
     let hash = md5(this.email);
-    let url = `${base}/${hash}/?s=${this.size}&d=${this.defaultGravatar}`;
-    if (this.forceDefault) {
-      url = url + '&f=y';
-    }
-    return url;
+    let url  = `${base}/${hash}/?s=${this.size}&d=${this.defaultGravatar}&r=${this.rating}`;
+
+    return url + (this.forceDefault ? '&f=y' : '');
   }
 }

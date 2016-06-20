@@ -1,6 +1,7 @@
 import {GravatarCustomElement} from './gravatar';
+import {Config} from './config';
 
-describe('gravatarCustomElement', () => {
+describe('Config', () => {
 
   let gravatar;
 
