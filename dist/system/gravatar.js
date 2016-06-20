@@ -1,7 +1,9 @@
 'use strict';
 
-System.register(['aurelia-framework', 'md5'], function (_export, _context) {
-  var computedFrom, bindable, md5, _createClass, _dec, _dec2, _desc, _value, _class, _descriptor, _descriptor2, GravatarCustomElement;
+System.register(['aurelia-framework', './config', 'md5'], function (_export, _context) {
+  "use strict";
+
+  var computedFrom, bindable, inject, Config, md5, _createClass, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, GravatarCustomElement;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -56,6 +58,9 @@ System.register(['aurelia-framework', 'md5'], function (_export, _context) {
     setters: [function (_aureliaFramework) {
       computedFrom = _aureliaFramework.computedFrom;
       bindable = _aureliaFramework.bindable;
+      inject = _aureliaFramework.inject;
+    }, function (_config) {
+      Config = _config.Config;
     }, function (_md) {
       md5 = _md.default;
     }],
@@ -78,18 +83,23 @@ System.register(['aurelia-framework', 'md5'], function (_export, _context) {
         };
       }();
 
-      _export('GravatarCustomElement', GravatarCustomElement = (_dec = computedFrom('defaultTo'), _dec2 = computedFrom('size', 'email', 'defaultGravatar', 'forceDefault', 'secure'), (_class = function () {
-        function GravatarCustomElement() {
+      _export('GravatarCustomElement', GravatarCustomElement = (_dec = inject(Config), _dec2 = computedFrom('defaultTo'), _dec3 = computedFrom('size', 'email', 'defaultGravatar', 'forceDefault', 'secure'), _dec(_class = (_class2 = function () {
+        function GravatarCustomElement(config) {
           _classCallCheck(this, GravatarCustomElement);
 
           _initDefineProp(this, 'email', _descriptor, this);
 
           _initDefineProp(this, 'size', _descriptor2, this);
 
-          this.rating = 'g';
-          this.forceDefault = false;
-          this.defaultTo = 'monsterid';
-          this.secure = false;
+          _initDefineProp(this, 'rating', _descriptor3, this);
+
+          _initDefineProp(this, 'forceDefault', _descriptor4, this);
+
+          _initDefineProp(this, 'defaultTo', _descriptor5, this);
+
+          _initDefineProp(this, 'secure', _descriptor6, this);
+
+          Object.assign(this, config.configurations);
         }
 
         _createClass(GravatarCustomElement, [{
@@ -106,34 +116,46 @@ System.register(['aurelia-framework', 'md5'], function (_export, _context) {
         }, {
           key: 'url',
           get: function get() {
-            var base = void 0;
-            if (this.secure) {
-              base = 'http://www.gravatar.com/avatar';
-            } else {
-              base = 'https://secure.gravatar.com/avatar';
-            }
-
+            var base = (this.secure ? 'https://secure' : 'http://www') + '.gravatar.com/avatar';
             var hash = md5(this.email);
-            var url = base + '/' + hash + '/?s=' + this.size + '&d=' + this.defaultGravatar;
-            if (this.forceDefault) {
-              url = url + '&f=y';
-            }
-            return url;
+            var url = base + '/' + hash + '/?s=' + this.size + '&d=' + this.defaultGravatar + '&r=' + this.rating;
+
+            return url + (this.forceDefault ? '&f=y' : '');
           }
         }]);
 
         return GravatarCustomElement;
-      }(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'email', [bindable], {
+      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'email', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return '';
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'size', [bindable], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'size', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 200;
         }
-      }), _applyDecoratedDescriptor(_class.prototype, 'defaultGravatar', [_dec], Object.getOwnPropertyDescriptor(_class.prototype, 'defaultGravatar'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'url', [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, 'url'), _class.prototype)), _class)));
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'rating', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 'g';
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'forceDefault', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return false;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'defaultTo', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 'monsterid';
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'secure', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return false;
+        }
+      }), _applyDecoratedDescriptor(_class2.prototype, 'defaultGravatar', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'defaultGravatar'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'url', [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'url'), _class2.prototype)), _class2)) || _class));
 
       _export('GravatarCustomElement', GravatarCustomElement);
     }
