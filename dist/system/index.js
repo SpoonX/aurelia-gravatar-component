@@ -1,10 +1,13 @@
 'use strict';
 
-System.register([], function (_export, _context) {
+System.register(['./config'], function (_export, _context) {
   "use strict";
 
+  var Config;
   return {
-    setters: [],
+    setters: [function (_config) {
+      Config = _config.Config;
+    }],
     execute: function () {
       function configure(app) {
         var configCallback = arguments.length <= 1 || arguments[1] === undefined ? function () {} : arguments[1];

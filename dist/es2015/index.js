@@ -1,3 +1,4 @@
+import { Config } from './config';
 
 export function configure(app, configCallback = () => {}) {
   let config = app.container.get(Config);
