@@ -1,3 +1,5 @@
+import {Config} from './config';
+
 /**
  * configure the gravatar component
  *
