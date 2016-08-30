@@ -55,6 +55,7 @@
     "vinyl-paths": "^1.0.0",
     "yargs": "^2.1.1"
   },
+  "main": "dist/commonjs/index.js",
   "jspm": {
     "registry": "npm",
     "main": "index",
