@@ -7,10 +7,12 @@ import {Config} from './config';
  * @param {function} configCallback
  *
  */
-export function configure(app, configCallback = () => {}) {
+export function configure(app, configCallback) {
   let config = app.container.get(Config);
 
-  typeof configCallback === 'function' &&  configCallback(config);
+  if (typeof configCallback === 'function') {
+    configCallback(config);
+  }
 
   app.globalResources('./gravatar');
 }

@@ -54,3 +54,63 @@ options.  `404` `mm` `identicon` `monsterid` `wavatar` `retro` `blank`.
 > [boolean=false]
 
 Whether to perform request over https
+
+## Installation
+
+### Aureli-Cli
+
+Run `npm i aurelia-gravatar-component --save` from your project root.
+
+aurelia-gravatar-component makes use of `md5`. So, add following to the `build.bundles.dependencies` section of `aurelia-project/aurelia.json`.
+
+```js
+"dependencies": [
+  // ...
+  "md5",
+  {
+    "name": "aurelia-gravatar-component",
+    "path": "../node_modules/aurelia-gravatar-component/dist/amd",
+    "main": "aurelia-gravatar-component",
+    "resources": [
+      "gravatar.html"
+    ]
+  },
+  // ...
+],
+```
+
+### Jspm
+
+Run `jspm i aurelia-gravatar-component` from your project root.
+
+aurelia-gravatar-component makes use of `md5`. So, add following to the desired `includes` section of `build/bundles.js`, eg:
+
+```js
+"aurelia": {
+  "includes": [
+    //...
+    "md5",
+    "aurelia-gravatar-component",
+    "[aurelia-gravatar-component/**/*.js]",
+    "aurelia-gravatar-component/**/*.html!text",
+    //...
+  ]
+}
+```
+
+If the installation results in having forks, try resolving them by running:
+
+```sh
+jspm inspect --forks
+jspm resolve --only registry:package-name@version
+```
+
+### Webpack
+
+Run `npm i aurelia-gravatar-component --save` from your project root.
+
+And add `aurelia-gravatar-component` in the `coreBundles.aurelia` section of your `webpack.config.js`.
+
+### Typescript
+
+Npm-based installations pick up the typings automatically. For Jspm-based installations, run `typings i github:spoonx/aurelia-gravatar-component` or add `"aurelia-gravatar-component": "github:spoonx/aurelia-gravatar-component",` to your `typings.json` and run `typings i`.

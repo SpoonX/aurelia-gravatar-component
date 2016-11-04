@@ -1,0 +1,24 @@
+{
+  "name": "aurelia-gravatar-component",
+  "version": "0.0.4",
+  "description": "A gravatar componenet for aurelia.",
+  "keywords": [
+    "aurelia",
+    "spoonx",
+    "gravatar",
+    "component"
+  ],
+  "homepage": "https://github.com/SpoonX/aurelia-gravatar-component#readme",
+  "main": "dist/commonjs/aurelia-gravatar-component.js",
+  "moduleType": "node",
+  "license": "MIT",
+  "author": "Bas Huis",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpoonX/aurelia-gravatar-component"
+  },
+  "dependencies": {
+    "aurelia-framework": "^1.0.0",
+    "md5": "^2.1.0"
+  }
+}
