@@ -1,12 +1,12 @@
-import {GravatarCustomElement} from './gravatar';
-import {Config} from './config';
+import {GravatarCustomElement} from 'src/gravatar';
+import {Config} from 'src/config';
 
-describe('Config', () => {
+describe('gravatarCustomElement', () => {
 
   let gravatar;
 
   beforeEach(() => {
-    gravatar = new GravatarCustomElement();
+    gravatar = new GravatarCustomElement(new Config());
   });
 
   it('has the following defaults', () => {

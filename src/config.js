@@ -11,6 +11,7 @@ export class Config {
    */
   configure(configs) {
     this.configurations = Object.assign(this.configurations, configs);
+
     return this;
   }
 }
